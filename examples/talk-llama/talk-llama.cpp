@@ -511,6 +511,18 @@ std::string RemoveTrailingCharacters(const std::string &inputString, const char 
     return std::string(inputString.begin(), lastNonTargetPosition.base());
 }
 
+std::string RemoveTrailingCharactersUtf8(const std::string& inputString, const std::u32string& targetCharacter) {
+    std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
+    std::u32string u32_input = converter.from_bytes(inputString);
+
+    auto lastNonTargetPosition = std::find_if(u32_input.rbegin(), u32_input.rend(), [&targetCharacter](char32_t ch) {
+        return targetCharacter.find(ch) == std::u32string::npos;
+    });
+
+    std::string result = converter.to_bytes(std::u32string(u32_input.begin(), lastNonTargetPosition.base()));
+    return result;
+}
+
 std::string UrlEncode(const std::string& str) {
     CURL* curl = curl_easy_init();
     if (curl) {
@@ -1245,8 +1257,8 @@ int run(int argc, const char ** argv) {
 				text_heard = RemoveTrailingCharacters(text_heard, '!');
 				text_heard = RemoveTrailingCharacters(text_heard, ',');
 				text_heard = RemoveTrailingCharacters(text_heard, '.');
-				text_heard = RemoveTrailingCharacters(text_heard, '«');
-				text_heard = RemoveTrailingCharacters(text_heard, '»');
+				text_heard = RemoveTrailingCharactersUtf8(text_heard, U"«");
+				text_heard = RemoveTrailingCharactersUtf8(text_heard, U"»");
 				if (text_heard[0] == '.') text_heard.erase(0, 1);
 				if (text_heard[0] == '!') text_heard.erase(0, 1);
 				trim(text_heard);
