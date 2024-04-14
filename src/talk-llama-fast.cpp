@@ -5,7 +5,6 @@
 #include "common-sdl.h"
 #include "common.h"
 #include "console.h"
-#include "console.cpp"
 #include "whisper.h"
 #include "llama.h"
 
