@@ -252,7 +252,7 @@ void high_pass_filter(
         std::vector<float> & data,
         float cutoff,
         float sample_rate);
-
+	
 // Basic voice activity detection (VAD) using audio energy adaptive threshold
 bool vad_simple(
         std::vector<float> & pcmf32,
@@ -260,7 +260,17 @@ bool vad_simple(
         int   last_ms,
         float vad_thold,
         float freq_thold,
-        bool  verbose);
+        bool  verbose);	
+
+// Basic voice activity detection (VAD) using audio energy adaptive threshold
+int vad_simple_int(
+        std::vector<float> & pcmf32,
+        int   sample_rate,
+        int   last_ms,
+        float vad_thold,
+        float freq_thold,
+        bool  verbose,
+        float  vad_start_thold);		
 
 // compute similarity between two strings using Levenshtein distance
 float similarity(const std::string & s0, const std::string & s1);

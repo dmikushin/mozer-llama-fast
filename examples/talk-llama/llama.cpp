@@ -7411,6 +7411,7 @@ static int llama_decode_internal(
 
     const auto n_batch = cparams.n_batch;
 
+	//printf("in llama_decode_internal. n_tokens: %d, n_batch: %d\n", n_tokens, n_batch);
     GGML_ASSERT(n_tokens <= n_batch);
 
     int n_threads = n_tokens == 1 ? cparams.n_threads : cparams.n_threads_batch;
