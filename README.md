@@ -1,13 +1,11 @@
 # LLAMA C/C++/CUDA engine with XTTS, wav2lip and Russian optimized for short phrases
 
 [Demo video in English](https://www.youtube.com/watch?v=ORDfSG4ltD4) with wav2lip, v0.1.3
+
 [Demo video in Russian](https://youtu.be/ciyEsZpzbM8) with wav2lip, v0.1.0
 
-@Mozer 's idea is to optimize [talk-llama](https://github.com/ggerganov/whisper.cpp) for faster response to short phrases (e.g. "How are you?") and split the speech into small pieces. He has managed to get 0.22s with distilled whisper.cpp medium in English: https://github.com/Mozer/talk-llama-fast/issues/8 . The faster-whisper is a little bit slower than that for short phrases: 0.26s. However faster-whisper uses 1.2 GB VRAM, and mine uses 2.0 GB. For long phrases faster-whisper is better, but the main purpose of this project is to transcribe short phrases. There is also whisperX that can do inference in batches, but it will be using lots of VRAM. XTTS streaming quality is bad, but no better option.
+@Mozer 's idea is to optimize [talk-llama](https://github.com/ggerganov/whisper.cpp) for faster response to short phrases (e.g. "How are you?") and split the speech into small pieces. He has managed to get 0.22s with distilled whisper.cpp medium in English: https://github.com/Mozer/talk-llama-fast/issues/8 . The [faster-whisper](https://github.com/SYSTRAN/faster-whisper) is a little bit slower than that for short phrases: 0.26s. However faster-whisper uses 1.2 GB VRAM, and mine uses 2.0 GB. For long phrases faster-whisper is better, but the main purpose of this project is to transcribe short phrases. There is also [whisperX](https://github.com/m-bain/whisperX) that can do inference in batches, but it will be using lots of VRAM. XTTS streaming quality is bad, but no better option.
 
-[new] English video, v0.1.3 with wav2lip: https://www.youtube.com/watch?v=ORDfSG4ltD4
-
-[new] Видео на русском, v0.1.0 с wav2lip: https://youtu.be/ciyEsZpzbM8
 
 ## I added:
 
