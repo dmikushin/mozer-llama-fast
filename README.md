@@ -1,12 +1,16 @@
-# talk-llama-fast
+# LLAMA C/C++/CUDA engine with XTTS, wav2lip and Russian optimized for short phrases
 
-based on talk-llama https://github.com/ggerganov/whisper.cpp
+[Demo video in English](https://www.youtube.com/watch?v=ORDfSG4ltD4) with wav2lip, v0.1.3
+[Demo video in Russian](https://youtu.be/ciyEsZpzbM8) with wav2lip, v0.1.0
+
+@Mozer 's idea is to optimize [talk-llama](https://github.com/ggerganov/whisper.cpp) for faster response to short phrases (e.g. "How are you?") and split the speech into small pieces. He has managed to get 0.22s with distilled whisper.cpp medium in English: https://github.com/Mozer/talk-llama-fast/issues/8 . The faster-whisper is a little bit slower than that for short phrases: 0.26s. However faster-whisper uses 1.2 GB VRAM, and mine uses 2.0 GB. For long phrases faster-whisper is better, but the main purpose of this project is to transcribe short phrases. There is also whisperX that can do inference in batches, but it will be using lots of VRAM. XTTS streaming quality is bad, but no better option.
 
 [new] English video, v0.1.3 with wav2lip: https://www.youtube.com/watch?v=ORDfSG4ltD4
 
 [new] Видео на русском, v0.1.0 с wav2lip: https://youtu.be/ciyEsZpzbM8
 
 ## I added:
+
 - XTTSv2 support
 - UTF8 and Russian
 - Speed-ups: streaming for generation, streaming for xtts, aggresive VAD
@@ -14,12 +18,14 @@ based on talk-llama https://github.com/ggerganov/whisper.cpp
 - generation/tts interruption when user is speaking
 
 ## I used: 
+
 - whisper.cpp ggml-medium-q5_0.bin
 - mistral-7b-instruct-v0.2.Q5_0.gguf
 - XTTSv2 server in streaming-mode
 - langchain google-serper
 
 ## News
+
 - [2024.04.06] v0.1.3. Removed --xtts-control-path param. No other changes. To make this version work - please update (pip install) my xtts_api_server, tts, and wav2lip if you have previous versions installed.
 - [2024.04.05] v0.1.2. Now everything is installed into 2 separate condas. Redownload zip, follow instructions below.
 - [2024.04.04] v0.1.0. Added streaming wav2lip. With super low latency: from user speech to video it's just 1.5 seconds! Had to rewrite sillyTavern-extras, wav2lip, xtts-api-server, tts (all forked to my github). Streaming wav2lip can be used in SillyTavern. Setup guide and video are coming in a next few days. 
