@@ -828,7 +828,7 @@ int run(int argc, const char ** argv) {
 	int reply_part = 0;
 	std::string text_to_speak_arr[150];
 	int reply_part_arr[150];
-	bool last_output_has_username = false;
+	bool last_output_has_username = false;	
 	
     if (whisper_params_parse(argc, argv, params) == false) {
         return 1;
@@ -840,19 +840,6 @@ int run(int argc, const char ** argv) {
         exit(0);
     }
 	
-	const std::string fileName{params.xtts_control_path};
-	std::ifstream readStream{fileName};	
-	if(!readStream.good()){
-		printf("Warning: %s file not found, xtts wont stop on user speech without it\n", params.xtts_control_path.c_str());
-		readStream.close();
-	}
-	else // control file is ok
-	{
-		readStream.close();
-		allow_xtts_file(params.xtts_control_path, 1); // xtts can play
-	}
-	
-
     // whisper init
     struct whisper_context_params cparams = whisper_context_default_params();
     cparams.use_gpu = params.use_gpu;    
